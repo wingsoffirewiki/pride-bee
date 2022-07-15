@@ -30,11 +30,14 @@ export default new Command()
       }
 
       const embed = new Discord.MessageEmbed();
-      const attachment = new Discord.MessageAttachment(flag, "flag.png");
+      const attachment = new Discord.MessageAttachment(
+        flag,
+        `${flagString}.png`
+      );
 
       embed
         .setTitle(`Flag \`${flagString}\``)
-        .setImage("attachment://flag.png")
+        .setImage(`attachment://${flagString}.png`)
         .setColor("RANDOM");
 
       interaction.reply({
