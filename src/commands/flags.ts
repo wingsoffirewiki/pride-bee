@@ -18,7 +18,7 @@ export default new Command()
     const flagString = interaction.options.getString("flag", false);
 
     if (flagString) {
-      const flag = await getFlagImage(flagString);
+      const flag = getFlagImage(flagString);
 
       if (!flag) {
         interaction.reply({
