@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { resolve } from "path";
 import sharp, { Sharp } from "sharp";
-import flags from "../assets/flags.json";
+import flags from "../config/flags.json";
 
 export const flagsSorted = sortFlags();
 
@@ -16,8 +16,8 @@ export function getFlagImage(flag: string): Sharp | undefined;
  */
 export function getFlagImage(flag: Flag | string): Sharp | undefined {
   const flagPath = resolve(
-    __dirname,
-    "../assets/flags",
+    process.cwd(),
+    "./assets/flags",
     `${getFlagNameFromAlias(flag)}.png`
   );
 

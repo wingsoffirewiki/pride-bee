@@ -33,7 +33,7 @@ function setPresence(client: Client<true>): void {
  */
 function sortImageList(): void {
   fs.writeFileSync(
-    "./src/assets/flags.json",
+    "./src/config/flags.json",
     JSON.stringify(flagsSorted, null, 2)
   );
 }
