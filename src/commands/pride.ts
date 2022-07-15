@@ -40,6 +40,8 @@ export default new Command()
     }
   ])
   .run(async (client, interaction) => {
+    await interaction.deferReply();
+
     const flagString = interaction.options.getString("flag", false);
     const image = interaction.options.getAttachment("image", false);
     const avatarAttachment = interaction.options.getAttachment("avatar", false);
@@ -54,7 +56,7 @@ export default new Command()
       });
 
     if (!avatarURL) {
-      interaction.reply({
+      interaction.followUp({
         ephemeral: true,
         content: "You must provide an avatar or have a valid avatar"
       });
@@ -67,7 +69,7 @@ export default new Command()
     let flag: Sharp | undefined;
 
     if (flagString && image) {
-      interaction.reply({
+      interaction.followUp({
         ephemeral: true,
         content: "You can only use one of the flag or image options!"
       });
@@ -84,7 +86,7 @@ export default new Command()
     }
 
     if (!flag) {
-      interaction.reply({
+      interaction.followUp({
         ephemeral: true,
         content: "Invalid flag!"
       });
@@ -96,7 +98,7 @@ export default new Command()
 
     const buffer = await renderedImage.png().toBuffer();
 
-    interaction.reply({
+    interaction.followUp({
       content: "Here you go!",
       files: [
         {
