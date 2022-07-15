@@ -45,7 +45,7 @@ function sortFlags(): Flags {
  * Gets the original name of the flag from an alias.
  * @param alias the alias of the flag
  */
-function getFlagNameFromAlias(alias: string): Flag | undefined {
+export function getFlagNameFromAlias(alias: string): Flag | undefined {
   return (Object.keys(flags) as Flag[]).find((flag) =>
     [flag, ...flags[flag]].includes(alias)
   );

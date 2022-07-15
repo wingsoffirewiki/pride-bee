@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { Command } from "fero-dc";
+import { Command, toPascalCase } from "fero-dc";
 import { Sharp } from "sharp";
-import { getFlagImage } from "../util/flags";
+import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
 import { getImageFromURL, circle, refresh } from "../util/sharp";
 
 export default new Command()
@@ -107,8 +107,12 @@ export default new Command()
     const attachment = new Discord.MessageAttachment(buffer, fileName);
     const embed = new Discord.MessageEmbed();
 
+    const flagName = flagString && getFlagNameFromAlias(flagString);
+
     embed
-      .setTitle("Pride")
+      .setTitle(
+        flagName ? `Pride With ${toPascalCase(flagName)} Flag` : "Pride"
+      )
       .setDescription("Here you go!")
       .setImage(`attachment://${fileName}`)
       .setColor("RANDOM");

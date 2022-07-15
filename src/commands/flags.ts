@@ -1,6 +1,11 @@
 import * as Discord from "discord.js";
-import { Command } from "fero-dc";
-import { flagsSorted, getFlagImage } from "../util/flags";
+import { Command, toPascalCase } from "fero-dc";
+import {
+  Flag,
+  flagsSorted,
+  getFlagImage,
+  getFlagNameFromAlias
+} from "../util/flags";
 
 export default new Command()
   .name("flags")
@@ -17,27 +22,17 @@ export default new Command()
   .run((client, interaction) => {
     const flagString = interaction.options.getString("flag", false);
 
-    if (flagString) {
-      const flag = getFlagImage(flagString);
+    if (flagString && getFlagNameFromAlias(flagString)) {
+      const flagName = getFlagNameFromAlias(flagString) as Flag;
 
-      if (!flag) {
-        interaction.reply({
-          ephemeral: true,
-          content: `Flag \`${flagString}\` not found`
-        });
-
-        return;
-      }
+      const flag = getFlagImage(flagName);
 
       const embed = new Discord.MessageEmbed();
-      const attachment = new Discord.MessageAttachment(
-        flag,
-        `${flagString}.png`
-      );
+      const attachment = new Discord.MessageAttachment(flag, `${flagName}.png`);
 
       embed
-        .setTitle(`Flag \`${flagString}\``)
-        .setImage(`attachment://${flagString}.png`)
+        .setTitle(`Flag \`${toPascalCase(flagName)}\``)
+        .setImage(`attachment://${flagName}.png`)
         .setColor("RANDOM");
 
       interaction.reply({
