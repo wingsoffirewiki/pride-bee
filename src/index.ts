@@ -1,5 +1,3 @@
-/** @format */
-
 import { Client, ClientOptions } from "fero-dc";
 
 import { config } from "dotenv";
