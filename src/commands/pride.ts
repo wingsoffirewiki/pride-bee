@@ -1,3 +1,4 @@
+import * as Discord from "discord.js";
 import { Command } from "fero-dc";
 import { Sharp } from "sharp";
 import { getFlagImage } from "../util/flags";
@@ -98,18 +99,23 @@ export default new Command()
 
     const buffer = await renderedImage.png().toBuffer();
 
+    const fileName = `${
+      interaction.user.username.toLowerCase().replace(/[^a-zA-Z0-9]/g, "") ||
+      "avatar"
+    }-pride.png`;
+
+    const attachment = new Discord.MessageAttachment(buffer, fileName);
+    const embed = new Discord.MessageEmbed();
+
+    embed
+      .setTitle("Pride")
+      .setDescription("Here you go!")
+      .setImage(`attachment://${fileName}`)
+      .setColor("RANDOM");
+
     interaction.followUp({
-      content: "Here you go!",
-      files: [
-        {
-          name: `${
-            interaction.user.username
-              .toLowerCase()
-              .replace(/[^a-zA-Z0-9]/g, "") || "avatar"
-          }-pride.png`,
-          attachment: buffer
-        }
-      ]
+      embeds: [embed],
+      files: [attachment]
     });
   });
 
