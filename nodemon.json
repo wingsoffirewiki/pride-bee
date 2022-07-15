@@ -1,0 +1,6 @@
+{
+  "watch": ["src/"],
+  "ext": "ts,json",
+  "ignore": "./src/assets/flags.json",
+  "exec": "ts-node ./src/index.ts --enable-source-maps"
+}

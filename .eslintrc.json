@@ -1,0 +1,32 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "prettier"
+  ],
+  "env": {
+    "es2022": true,
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "curly": ["error", "all"],
+    "quotes": ["error", "double"],
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
+        }
+      }
+    ]
+  },
+  "plugins": ["prettier"]
+}
