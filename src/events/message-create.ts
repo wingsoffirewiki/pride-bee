@@ -11,7 +11,11 @@ export default new Event<"messageCreate">()
 
       await sleep(5000);
 
-      reply.delete();
-      message.delete();
+      try {
+        reply.delete();
+        message.delete();
+      } catch {
+        console.log("Bot does not have delete perms");
+      }
     }
   });
