@@ -727,10 +727,10 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
-fero-dc@4.0.0-dev-1:
-  version "4.0.0-dev-1"
-  resolved "https://registry.yarnpkg.com/fero-dc/-/fero-dc-4.0.0-dev-1.tgz#838b1d65ee4605a2abe42159b64d6c677f255e80"
-  integrity sha512-0F0G3xVXB2BN5Yy5tLgeHViumWNYsn7EQq/LxMyhQseH58SujMJkFjXaZR0l9o4TWAwpEEKPAKCey2kQGNYB1A==
+fero-dc@4.0.0-dev-2:
+  version "4.0.0-dev-2"
+  resolved "https://registry.yarnpkg.com/fero-dc/-/fero-dc-4.0.0-dev-2.tgz#6fa8735242c2172861c4870034fd2a01b30660b1"
+  integrity sha512-dbJLOomhaoQlsMR+UK4qGNsZQSBsycM2kSyhBj7Ejg0nCD9x0DX9/iYDoRzWoBHCTwGTgOD+StL58jOdDxCv/g==
   dependencies:
     glob "8.0.3"
     lodash "4.17.21"
