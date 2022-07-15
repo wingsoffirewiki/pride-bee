@@ -34,11 +34,9 @@ export function getFlagImage(flag: Flag | string): Sharp | undefined {
 function sortFlags(): Flags {
   const entries = Object.entries(flags);
 
-  const sortedEntries = entries
-    .sort((a, b) => a[0].localeCompare(b[0]))
-    .map((entry) => [entry[0], entry[1].sort((a, b) => a.localeCompare(b))]);
+  const sortedEntries = entries.sort((a, b) => a[0].localeCompare(b[0]));
 
-  return Object.fromEntries(sortedEntries);
+  return Object.fromEntries(sortedEntries) as Flags;
 }
 
 /**
