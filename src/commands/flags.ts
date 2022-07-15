@@ -14,7 +14,7 @@ export default new Command()
       required: false
     }
   ])
-  .run(async (client, interaction) => {
+  .run((client, interaction) => {
     const flagString = interaction.options.getString("flag", false);
 
     if (flagString) {
