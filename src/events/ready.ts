@@ -1,11 +1,14 @@
-import { Client, Event } from "fero-dc";
+import { ActivityType } from "discord.js";
+import { Client, EventBuilder } from "fero-dc";
 import fs from "fs";
 import { flagsSorted } from "../util/flags";
 
-export default new Event<"ready">().event("ready").run(async (client) => {
-  setPresence(client);
-  sortImageList();
-});
+export default new EventBuilder<"ready">()
+  .event("ready")
+  .run(async (client) => {
+    setPresence(client);
+    sortImageList();
+  });
 
 /**
  * Sets the presence of the bot
@@ -19,7 +22,7 @@ function setPresence(client: Client<true>): void {
       activities: [
         {
           name: `/pride in ${client.guilds.cache.size} servers.`,
-          type: "WATCHING"
+          type: ActivityType.Watching
         }
       ]
     });

@@ -1,10 +1,10 @@
 import * as Discord from "discord.js";
-import { Command, toPascalCase } from "fero-dc";
+import { CommandBuilder, toPascalCase } from "fero-dc";
 import { Sharp } from "sharp";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
 import { getImageFromURL, circle, refresh } from "../util/sharp";
 
-export default new Command()
+export default new CommandBuilder()
   .name("pride")
   .description("Attaches a pride flag to your avatar")
   .category("Pride")
@@ -12,31 +12,31 @@ export default new Command()
     {
       name: "flag",
       description: "The flag to attach",
-      type: "STRING",
+      type: Discord.ApplicationCommandOptionType.String,
       required: false
     },
     {
       name: "image",
       description: "The image to use as a flag instead of the flag option",
-      type: "ATTACHMENT",
+      type: Discord.ApplicationCommandOptionType.Attachment,
       required: false
     },
     {
       name: "avatar",
       description: "The image to use as the avatar",
-      type: "ATTACHMENT",
+      type: Discord.ApplicationCommandOptionType.Attachment,
       required: false
     },
     {
       name: "mask",
       description: "Whether to mask the flag over the avatar",
-      type: "BOOLEAN",
+      type: Discord.ApplicationCommandOptionType.Boolean,
       required: false
     },
     {
       name: "blend",
       description: "Whether to blend the flag and blur the lines",
-      type: "BOOLEAN",
+      type: Discord.ApplicationCommandOptionType.Boolean,
       required: false
     }
   ])
@@ -52,7 +52,7 @@ export default new Command()
     const avatarURL =
       avatarAttachment?.url ??
       interaction.user.avatarURL({
-        format: "png",
+        extension: "png",
         size: 1024
       });
 
@@ -104,8 +104,8 @@ export default new Command()
       "avatar"
     }-pride.png`;
 
-    const attachment = new Discord.MessageAttachment(buffer, fileName);
-    const embed = new Discord.MessageEmbed();
+    const attachment = new Discord.AttachmentBuilder(buffer).setName(fileName);
+    const embed = new Discord.EmbedBuilder();
 
     const flagName = flagString && getFlagNameFromAlias(flagString);
 
@@ -115,7 +115,7 @@ export default new Command()
       )
       .setDescription("Here you go!")
       .setImage(`attachment://${fileName}`)
-      .setColor("RANDOM");
+      .setColor("Random");
 
     interaction.followUp({
       embeds: [embed],

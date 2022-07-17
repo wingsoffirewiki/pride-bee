@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "axios": "0.27.2",
-    "discord.js": "13.8.1",
-    "fero-dc": "4.0.0-dev-2",
+    "discord.js": "14.0.1",
+    "fero-dc": "4.0.0-dev-4",
     "sharp": "0.30.7"
   },
   "devDependencies": {

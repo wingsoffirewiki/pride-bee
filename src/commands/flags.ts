@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, toPascalCase } from "fero-dc";
+import { CommandBuilder, toPascalCase } from "fero-dc";
 import {
   Flag,
   flagsSorted,
@@ -7,18 +7,16 @@ import {
   getFlagNameFromAlias
 } from "../util/flags";
 
-export default new Command()
+export default new CommandBuilder()
   .name("flags")
   .description("Get the currently available flags")
   .category("Utility")
-  .options([
-    {
-      name: "flag",
-      description: "The flag to view",
-      type: "STRING",
-      required: false
-    }
-  ])
+  .options({
+    name: "flag",
+    description: "The flag to view",
+    type: Discord.ApplicationCommandOptionType.String,
+    required: false
+  })
   .run((client, interaction) => {
     const flagString = interaction.options.getString("flag", false);
 
@@ -27,13 +25,15 @@ export default new Command()
 
       const flag = getFlagImage(flagName);
 
-      const embed = new Discord.MessageEmbed();
-      const attachment = new Discord.MessageAttachment(flag, `${flagName}.png`);
+      const embed = new Discord.EmbedBuilder();
+      const attachment = new Discord.AttachmentBuilder(flag).setName(
+        `${flagName}.png`
+      );
 
       embed
         .setTitle(`Flag \`${toPascalCase(flagName)}\``)
         .setImage(`attachment://${flagName}.png`)
-        .setColor("RANDOM");
+        .setColor("Random");
 
       interaction.reply({
         embeds: [embed],
@@ -43,7 +43,7 @@ export default new Command()
       return;
     }
 
-    const embed = new Discord.MessageEmbed();
+    const embed = new Discord.EmbedBuilder();
 
     const flagEntries = Object.entries(flagsSorted);
     const flags = flagEntries.map(
@@ -59,7 +59,7 @@ export default new Command()
           "\n"
         )}`
       )
-      .setColor("RANDOM");
+      .setColor("Random");
 
     interaction.reply({ ephemeral: true, embeds: [embed] });
   });

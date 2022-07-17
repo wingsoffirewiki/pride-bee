@@ -1,9 +1,9 @@
-import { Event } from "fero-dc";
+import { EventBuilder } from "fero-dc";
 
-export default new Event<"interactionCreate">()
+export default new EventBuilder<"interactionCreate">()
   .event("interactionCreate")
   .run(async (client, interaction) => {
-    if (!interaction.isCommand()) {
+    if (!interaction.isChatInputCommand()) {
       return;
     }
 

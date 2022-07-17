@@ -1,6 +1,6 @@
-import { Event } from "fero-dc";
+import { EventBuilder } from "fero-dc";
 
-export default new Event<"messageCreate">()
+export default new EventBuilder<"messageCreate">()
   .event("messageCreate")
   .run((client, message) => {
     if (message.content.startsWith("b!")) {
