@@ -1,7 +1,7 @@
 {
   "dev": true,
   "devGuildID": "",
-  "intents": ["Guilds", "GuildMessages"],
+  "intents": ["Guilds", "GuildMessages", "MessageContent"],
   "commandsPath": "./commands",
   "eventsPath": "./events",
   "commandLoadedMessage": true,
