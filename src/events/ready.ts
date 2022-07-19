@@ -59,7 +59,7 @@ function checkIfEachImageExists(): void {
 
       return exists;
     })
-    .reduce((acc, curr) => acc && curr, true);
+    .every((exists) => exists);
 
   if (allExist) {
     console.log("✅ All images found.");
