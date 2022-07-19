@@ -9,6 +9,7 @@ export default new EventBuilder<"ready">()
   .run(async (client) => {
     setPresence(client);
     sortImageList();
+    checkIfEachImageExists();
   });
 
 /**
@@ -42,4 +43,29 @@ function sortImageList(): void {
       parser: "json"
     })
   );
+}
+
+/**
+ * Checks if each flag image exists
+ */
+function checkIfEachImageExists(): void {
+  const allExist = Object.keys(flagsSorted)
+    .map((flag) => {
+      const exists = fs.existsSync(`./assets/flags/${flag}.png`);
+
+      console.log(
+        exists ? `✅ ${flag}'s image found.` : `❌ ${flag}'s image not found.`
+      );
+
+      return exists;
+    })
+    .reduce((acc, curr) => acc && curr, true);
+
+  if (allExist) {
+    console.log("✅ All images found.");
+  } else {
+    console.log("❌ Some flags do not exist.");
+
+    process.exit(1);
+  }
 }
