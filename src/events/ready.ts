@@ -2,6 +2,7 @@ import { ActivityType } from "discord.js";
 import { Client, EventBuilder } from "fero-dc";
 import fs from "fs";
 import { flagsSorted } from "../util/flags";
+import prettier from "prettier";
 
 export default new EventBuilder<"ready">()
   .event("ready")
@@ -37,6 +38,8 @@ function setPresence(client: Client<true>): void {
 function sortImageList(): void {
   fs.writeFileSync(
     "./src/config/flags.json",
-    JSON.stringify(flagsSorted, null, 2)
+    prettier.format(JSON.stringify(flagsSorted), {
+      parser: "json"
+    })
   );
 }
