@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
-import { CommandBuilder, toPascalCase } from "fero-dc";
+import { CommandBuilder } from "fero-dc";
 import { Sharp } from "sharp";
+import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
 import { getImageFromURL, circle, refresh } from "../util/sharp";
 
@@ -8,7 +9,7 @@ export default new CommandBuilder()
   .name("pride")
   .description("Attaches a pride flag to your avatar")
   .category("Pride")
-  .options([
+  .options(
     {
       name: "flag",
       description: "The flag to attach",
@@ -39,7 +40,7 @@ export default new CommandBuilder()
       type: Discord.ApplicationCommandOptionType.Boolean,
       required: false
     }
-  ])
+  )
   .run(async (client, interaction) => {
     await interaction.deferReply();
 

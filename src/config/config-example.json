@@ -1,12 +1,12 @@
 {
   "dev": true,
-  "devGuildID": "",
+  "devGuildId": "",
   "intents": ["Guilds", "GuildMessages", "MessageContent"],
   "commandsPath": "./commands",
   "eventsPath": "./events",
   "commandLoadedMessage": true,
   "deleteUnusedApplicationCommands": true,
-  "editApplicationCommands": "all",
+  "editApplicationCommands": true,
   "allowedMentions": {
     "repliedUser": false
   }

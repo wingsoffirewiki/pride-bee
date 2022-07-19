@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
-import { CommandBuilder, toPascalCase } from "fero-dc";
+import { CommandBuilder } from "fero-dc";
+import { toPascalCase } from "../util/casing";
 import {
   Flag,
   flagsSorted,
