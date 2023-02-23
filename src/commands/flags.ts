@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { CommandBuilder } from "fero-dc";
+import { Command } from "fero-dc";
 import { toPascalCase } from "../util/casing";
 import {
   Flag,
@@ -8,17 +8,17 @@ import {
   getFlagNameFromAlias
 } from "../util/flags";
 
-export default new CommandBuilder()
-  .name("flags")
-  .description("Get the currently available flags")
-  .category("Utility")
+export default new Command()
+  .setName("flags")
+  .setDescription("Get the currently available flags")
+  .setCategory("Utility")
   .options({
     name: "flag",
     description: "The flag to view",
     type: Discord.ApplicationCommandOptionType.String,
     required: false
   })
-  .run((client, interaction) => {
+  .setExecutor((client, interaction) => {
     const flagString = interaction.options.getString("flag", false);
 
     if (flagString && getFlagNameFromAlias(flagString)) {

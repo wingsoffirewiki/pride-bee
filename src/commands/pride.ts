@@ -1,14 +1,14 @@
 import * as Discord from "discord.js";
-import { CommandBuilder } from "fero-dc";
+import { Command } from "fero-dc";
 import { Sharp } from "sharp";
 import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
 import { getImageFromURL, circle, refresh } from "../util/sharp";
 
-export default new CommandBuilder()
-  .name("pride")
-  .description("Attaches a pride flag to your avatar")
-  .category("Pride")
+export default new Command()
+  .setName("pride")
+  .setDescription("Attaches a pride flag to your avatar")
+  .setCategory("Pride")
   .options(
     {
       name: "flag",
@@ -41,7 +41,7 @@ export default new CommandBuilder()
       required: false
     }
   )
-  .run(async (client, interaction) => {
+  .setExecutor(async (client, interaction) => {
     await interaction.deferReply();
 
     const flagString = interaction.options.getString("flag", false);

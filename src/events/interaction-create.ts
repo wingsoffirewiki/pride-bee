@@ -1,8 +1,8 @@
-import { EventBuilder } from "fero-dc";
+import { EventListener } from "fero-dc";
 
-export default new EventBuilder<"interactionCreate">()
-  .event("interactionCreate")
-  .run(async (client, interaction) => {
+export default new EventListener<"interactionCreate">()
+  .setEvent("interactionCreate")
+  .setHandler(async (client, interaction) => {
     if (!interaction.isChatInputCommand()) {
       return;
     }
@@ -12,7 +12,7 @@ export default new EventBuilder<"interactionCreate">()
     const command = client.commands.get(commandName);
 
     if (command) {
-      command.data.run(client, interaction);
+      command.executor(client, interaction);
     } else {
       interaction.reply({
         ephemeral: true,

@@ -1,13 +1,13 @@
 import * as Discord from "discord.js";
-import { CommandBuilder } from "fero-dc";
+import { Command } from "fero-dc";
 
 const repoLink = "https://github.com/wingsoffirewiki/Pride-Bee";
 
-export default new CommandBuilder()
-  .name("contribute")
-  .description("Shows GitHub link to contribute to the bot")
-  .category("Utility")
-  .run((client, interaction) => {
+export default new Command()
+  .setName("contribute")
+  .setDescription("Shows GitHub link to contribute to the bot")
+  .setCategory("Utility")
+  .setExecutor((client, interaction) => {
     const embed = new Discord.EmbedBuilder();
 
     embed

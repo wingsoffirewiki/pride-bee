@@ -1,12 +1,12 @@
 import { ActivityType } from "discord.js";
-import { Client, EventBuilder } from "fero-dc";
+import { Client, EventListener } from "fero-dc";
 import fs from "fs";
 import { flagsSorted } from "../util/flags";
 import prettier from "prettier";
 
-export default new EventBuilder<"ready">()
-  .event("ready")
-  .run(async (client) => {
+export default new EventListener<"ready">()
+  .setEvent("ready")
+  .setHandler(async (client) => {
     setPresence(client);
     sortImageList();
     checkIfEachImageExists();
