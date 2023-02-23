@@ -124,13 +124,6 @@ export default new Command()
     });
   });
 
-/**
- * Render the pride flag on the avatar
- * @param flag the flag to attach
- * @param avatar the avatar to attach the flag to
- * @param mask whether to mask the flag over the avatar
- * @param blend whether to blend the flag and blur the lines
- */
 async function render(
   flag: Sharp,
   avatar: Sharp,

@@ -10,10 +10,6 @@ export type Flag = keyof Flags;
 
 export function getFlagImage(flag: Flag): Sharp;
 export function getFlagImage(flag: string): Sharp | undefined;
-/**
- * Gets the flag image for the given flag.
- * @param flag the flag to get the image of
- */
 export function getFlagImage(flag: Flag | string): Sharp | undefined {
   const flagPath = resolve(
     process.cwd(),
@@ -28,9 +24,6 @@ export function getFlagImage(flag: Flag | string): Sharp | undefined {
   return sharp(flagPath);
 }
 
-/**
- * Sorts the flags by their name.
- */
 function sortFlags(): Flags {
   const entries = Object.entries(flags);
 
@@ -39,10 +32,6 @@ function sortFlags(): Flags {
   return Object.fromEntries(sortedEntries) as Flags;
 }
 
-/**
- * Gets the original name of the flag from an alias.
- * @param alias the alias of the flag
- */
 export function getFlagNameFromAlias(alias: string): Flag | undefined {
   return (Object.keys(flags) as Flag[]).find((flag) =>
     [flag, ...flags[flag]].includes(alias)

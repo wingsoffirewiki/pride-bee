@@ -1,7 +1,3 @@
-/**
- * Convert a string to PascalCase.
- * @param str the string to convert
- */
 export function toPascalCase(str: string): string {
   return str
     .split(/[- A-Z]/)

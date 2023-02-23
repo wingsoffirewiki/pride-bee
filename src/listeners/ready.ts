@@ -12,10 +12,6 @@ export default new EventListener<"ready">()
     checkIfEachImageExists();
   });
 
-/**
- * Sets the presence of the bot
- * @param client The client to set the presence of
- */
 function setPresence(client: Client<true>): void {
   const presence = () =>
     client.user.setPresence({
@@ -33,9 +29,6 @@ function setPresence(client: Client<true>): void {
   setInterval(presence, 60000);
 }
 
-/**
- * Sorts the image list
- */
 function sortImageList(): void {
   fs.writeFileSync(
     "./src/config/flags.json",
@@ -45,9 +38,6 @@ function sortImageList(): void {
   );
 }
 
-/**
- * Checks if each flag image exists
- */
 function checkIfEachImageExists(): void {
   const allExist = Object.keys(flagsSorted)
     .map((flag) => {
