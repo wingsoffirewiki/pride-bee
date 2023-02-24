@@ -3,7 +3,7 @@ import { Command } from "fero-dc";
 import { Sharp } from "sharp";
 import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
-import { getImageFromURL, circle, refresh, render } from "../util/sharp";
+import { getImageFromURL, render } from "../util/sharp";
 
 export default new Command()
   .setName("pride")

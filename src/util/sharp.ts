@@ -15,7 +15,7 @@ export async function getImageFromURL(url: string): Promise<Sharp> {
   return image;
 }
 
-export async function circle(image: Sharp): Promise<Sharp> {
+async function circle(image: Sharp): Promise<Sharp> {
   const metadata = await image.metadata();
 
   const width = metadata.width ?? 1024;
@@ -36,7 +36,7 @@ export async function circle(image: Sharp): Promise<Sharp> {
   return composite;
 }
 
-export async function refresh(image: Sharp): Promise<Sharp> {
+async function refresh(image: Sharp): Promise<Sharp> {
   return sharp(await image.toBuffer());
 }
 
