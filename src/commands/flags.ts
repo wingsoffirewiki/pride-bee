@@ -12,7 +12,7 @@ export default new Command()
   .setName("flags")
   .setDescription("Get the currently available flags")
   .setCategory("Utility")
-  .options({
+  .setOptions({
     name: "flag",
     description: "The flag to view",
     type: Discord.ApplicationCommandOptionType.String,
