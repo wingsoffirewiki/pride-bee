@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { resolve } from "path";
 import sharp, { Sharp } from "sharp";
-import flags from "../config/flags.json";
+import flags from "../config/flags.json" assert { type: "json" };
 
 export const flagsSorted = sortFlags();
 

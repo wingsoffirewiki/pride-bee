@@ -4,6 +4,7 @@
   "description": "A bot for adding flags to your discord avatar!",
   "main": "dist/index.js",
   "author": "wofwiki <wings.of.fire.fandom.wiki@gmail.com>",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "start": "node --enable-source-maps .",
