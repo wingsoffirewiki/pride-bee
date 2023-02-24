@@ -6,8 +6,7 @@
   "author": "wofwiki <wings.of.fire.fandom.wiki@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "run": "node --enable-source-maps .",
-    "start": "yarn build && yarn run run",
+    "start": "node --enable-source-maps .",
     "dev": "nodemon",
     "build": "tsc",
     "pretty": "prettier --check \"src/**/*.ts\"",
