@@ -9,7 +9,7 @@ export default new Command()
   .setName("pride")
   .setDescription("Attaches a pride flag to your avatar")
   .setCategory("Pride")
-  .options(
+  .setOptions(
     {
       name: "flag",
       description: "The flag to attach",
