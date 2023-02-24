@@ -3,7 +3,7 @@ import { Command } from "fero-dc";
 import { Sharp } from "sharp";
 import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
-import { getImageFromURL, circle, refresh } from "../util/sharp";
+import { getImageFromURL, circle, refresh, render } from "../util/sharp";
 
 export default new Command()
   .setName("pride")
@@ -123,43 +123,3 @@ export default new Command()
       files: [attachment]
     });
   });
-
-async function render(
-  flag: Sharp,
-  avatar: Sharp,
-  mask: boolean,
-  blend: boolean
-): Promise<Sharp> {
-  if (blend) {
-    flag = flag.blur(25);
-  }
-
-  if (mask) {
-    avatar = await circle(avatar);
-
-    flag = flag.composite([
-      {
-        input: await avatar.toBuffer(),
-        blend: "multiply"
-      }
-    ]);
-  } else {
-    avatar = await circle(avatar);
-    avatar = await refresh(avatar);
-    avatar = avatar.resize(944, 944, {
-      fit: "cover"
-    });
-
-    flag = flag.composite([
-      {
-        input: await avatar.toBuffer(),
-        top: 40,
-        left: 40
-      }
-    ]);
-  }
-
-  flag = await refresh(flag);
-
-  return circle(flag);
-}
