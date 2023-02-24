@@ -5,7 +5,7 @@
     "Guilds"
   ],
   "commandsPath": "./commands",
-  "eventsPath": "./listeners",
+  "eventListenersPath": "./listeners",
   "commandLoadedMessage": true,
   "deleteUnusedApplicationCommands": true,
   "editApplicationCommands": true
