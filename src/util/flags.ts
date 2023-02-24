@@ -5,8 +5,9 @@ import flags from "../config/flags.json" assert { type: "json" };
 
 export const flagsSorted = sortFlags();
 
-export type Flags = typeof flags;
-export type Flag = keyof Flags;
+type FlagObject = typeof flags;
+export type Flag = keyof FlagObject;
+type Flags = Record<Flag, string[]>;
 
 export function getFlagImage(flag: Flag): Sharp;
 export function getFlagImage(flag: string): Sharp | undefined;
