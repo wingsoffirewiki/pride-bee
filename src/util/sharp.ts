@@ -22,13 +22,13 @@ export async function circle(image: Sharp): Promise<Sharp> {
 
   const radius = width / 2;
 
-  const circleSVG = Buffer.from(
+  const circleSvg = Buffer.from(
     `<svg><circle cx="${radius}" cy="${radius}" r="${radius}" /></svg>`
   );
 
   const composite = image.composite([
     {
-      input: circleSVG,
+      input: circleSvg,
       blend: "dest-in"
     }
   ]);
