@@ -12,7 +12,6 @@ export default new EventListener<"ready">()
     setInterval(() => setPresence(client), HOUR_IN_MILLISECONDS);
 
     if (!imagesExist()) {
-      console.log("❌ Some flags do not exist.");
       process.exit(1);
     }
   });
