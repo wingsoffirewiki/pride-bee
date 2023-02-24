@@ -41,6 +41,7 @@ export default new Command()
       required: false
     }
   )
+  .setPermissions(Discord.PermissionFlagsBits.SendMessages)
   .setExecutor(async (client, interaction) => {
     await interaction.deferReply();
 

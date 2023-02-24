@@ -7,6 +7,7 @@ export default new Command()
   .setName("contribute")
   .setDescription("Shows GitHub link to contribute to the bot")
   .setCategory("Utility")
+  .setPermissions(Discord.PermissionFlagsBits.SendMessages)
   .setExecutor((client, interaction) => {
     const embed = new Discord.EmbedBuilder();
 

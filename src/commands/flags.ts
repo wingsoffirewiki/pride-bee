@@ -18,6 +18,7 @@ export default new Command()
     type: Discord.ApplicationCommandOptionType.String,
     required: false
   })
+  .setPermissions(Discord.PermissionFlagsBits.SendMessages)
   .setExecutor((client, interaction) => {
     const flagString = interaction.options.getString("flag", false);
 
