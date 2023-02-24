@@ -1,17 +1,17 @@
 import sharp, { Sharp } from "sharp";
-import axios from "axios";
 
 export async function getImageFromURL(url: string): Promise<Sharp> {
-  const response = await axios
-    .get(url, { responseType: "arraybuffer" })
-    .catch(console.log);
-
-  if (!response) {
-    throw new Error("Could not get image from URL");
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch image from ${url}: ${response.statusText}`
+    );
   }
 
-  const image = sharp(response.data);
+  const arrayBuffer = await response.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
 
+  const image = sharp(buffer);
   return image;
 }
 
