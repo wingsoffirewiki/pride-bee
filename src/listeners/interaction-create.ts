@@ -11,12 +11,18 @@ export default new EventListener<"interactionCreate">()
 
     const command = client.commands.get(commandName);
 
-    if (command) {
-      command.executor(client, interaction);
-    } else {
+    if (!command) {
       interaction.reply({
         ephemeral: true,
         content: `Command ${commandName} does not exist on this bot!`
       });
+
+      return;
+    }
+
+    try {
+      command.executor(client, interaction);
+    } catch (error) {
+      console.error(error);
     }
   });
