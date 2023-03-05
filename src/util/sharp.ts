@@ -52,6 +52,7 @@ export async function render(
 
   if (mask) {
     avatar = await circle(avatar);
+    avatar = await refresh(avatar);
 
     flag = flag.composite([
       {
@@ -65,6 +66,7 @@ export async function render(
     avatar = avatar.resize(944, 944, {
       fit: "cover"
     });
+    avatar = await refresh(avatar);
 
     flag = flag.composite([
       {
