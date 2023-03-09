@@ -14,7 +14,7 @@ const client = new Client(options as ClientOptions, __dirname);
 const token = process.env.TOKEN;
 
 if (token === undefined) {
-  throw new Error("Token is not defined");
+	throw new Error("Token is not defined");
 }
 
 client.start(token);

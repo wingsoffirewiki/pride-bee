@@ -1,28 +1,28 @@
 import { EventListener } from "fero-dc";
 
 export default new EventListener<"interactionCreate">()
-  .setEvent("interactionCreate")
-  .setHandler(async (client, interaction) => {
-    if (!interaction.isChatInputCommand()) {
-      return;
-    }
+	.setEvent("interactionCreate")
+	.setHandler(async (client, interaction) => {
+		if (!interaction.isChatInputCommand()) {
+			return;
+		}
 
-    const commandName = interaction.commandName;
+		const commandName = interaction.commandName;
 
-    const command = client.commands.get(commandName);
+		const command = client.commands.get(commandName);
 
-    if (!command) {
-      interaction.reply({
-        ephemeral: true,
-        content: `Command ${commandName} does not exist on this bot!`
-      });
+		if (!command) {
+			interaction.reply({
+				ephemeral: true,
+				content: `Command ${commandName} does not exist on this bot!`
+			});
 
-      return;
-    }
+			return;
+		}
 
-    try {
-      command.executor(client, interaction);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+		try {
+			command.executor(client, interaction);
+		} catch (error) {
+			console.error(error);
+		}
+	});
