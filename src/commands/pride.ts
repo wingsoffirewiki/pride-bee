@@ -1,6 +1,5 @@
 import * as Discord from "discord.js";
 import { Command } from "fero-dc";
-import { Sharp } from "sharp";
 import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
 import { getImageFromUrl, render } from "../util/sharp";
@@ -78,15 +77,11 @@ export default new Command()
 			});
 
 			return;
-		} else if (flagString && !image) {
-			flag = getFlagImage(flagString);
-		} else if (!flagString && image) {
-			flag = (await getImageFromUrl(image.url)).resize(1024, 1024, {
-				fit: "fill"
-			});
-		} else {
-			flag = getFlagImage("lgbt");
 		}
+
+		const flag = image
+			? await getImageFromUrl(image.url)
+			: getFlagImage(flagString ?? "lgbt");
 
 		if (!flag) {
 			interaction.followUp({
