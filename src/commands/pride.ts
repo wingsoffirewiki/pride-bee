@@ -3,7 +3,7 @@ import { Command } from "fero-dc";
 import { Sharp } from "sharp";
 import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
-import { getImageFromURL, render } from "../util/sharp";
+import { getImageFromUrl, render } from "../util/sharp";
 
 export default new Command()
 	.setName("pride")
@@ -67,7 +67,7 @@ export default new Command()
 			return;
 		}
 
-		const avatar = await getImageFromURL(avatarURL);
+		const avatar = await getImageFromUrl(avatarURL);
 
 		let flag: Sharp | undefined;
 
@@ -81,7 +81,7 @@ export default new Command()
 		} else if (flagString && !image) {
 			flag = getFlagImage(flagString);
 		} else if (!flagString && image) {
-			flag = (await getImageFromURL(image.url)).resize(1024, 1024, {
+			flag = (await getImageFromUrl(image.url)).resize(1024, 1024, {
 				fit: "fill"
 			});
 		} else {

@@ -31,7 +31,7 @@ export async function render(
 	return circle;
 }
 
-export async function getImageFromURL(url: string): Promise<Sharp> {
+export async function getImageFromUrl(url: string): Promise<Sharp> {
 	const response = await fetch(url);
 	if (!response.ok) {
 		throw new Error(
