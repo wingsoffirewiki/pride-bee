@@ -258,6 +258,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^18.14.6":
+  version: 18.14.6
+  resolution: "@types/node@npm:18.14.6"
+  checksum: 2f88f482cabadc6dbddd627a1674239e68c3c9beab56eb4ae2309fb96fd17fc3a509d99b0309bafe13b58529574f49ecf3a583f2ebe2896dd32fe4be436dc96e
+  languageName: node
+  linkType: hard
+
 "@types/prettier@npm:2.7.2":
   version: 2.7.2
   resolution: "@types/prettier@npm:2.7.2"
@@ -2179,6 +2186,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "pride-bee@workspace:."
   dependencies:
+    "@types/node": ^18.14.6
     "@types/prettier": 2.7.2
     "@types/sharp": 0.31.1
     "@typescript-eslint/eslint-plugin": 5.53.0
