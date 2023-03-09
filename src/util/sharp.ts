@@ -13,10 +13,9 @@ export async function render(
 
   const circleAvatar = await createCircle(avatar);
 
-  const resizedAvatar = await resize(
-    circleAvatar,
-    IMAGE_SIZE - IMAGE_PADDING * 2
-  );
+  const resizedAvatar = mask
+    ? avatar
+    : await resize(circleAvatar, IMAGE_SIZE - IMAGE_PADDING * 2);
 
   const compositeImage = await createComposite(
     blendedFlagImage,
