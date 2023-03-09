@@ -12,7 +12,7 @@
     "build": "tsc",
     "pretty": "prettier --check \"src/**/*.ts\"",
     "pretty-fix": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint  -c .eslintrc.json\"src/**/*.ts\"",
+    "lint": "eslint  -c .eslintrc.json \"src/**/*.ts\"",
     "lint-fix": "eslint --fix -c .eslintrc.json \"src/**/*.ts\""
   },
   "dependencies": {
