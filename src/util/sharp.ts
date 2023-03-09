@@ -2,6 +2,7 @@ import sharp, { type Blend, Sharp } from "sharp";
 
 const IMAGE_SIZE = 1024;
 const IMAGE_PADDING = 40;
+const IMAGE_SIZE_WITHOUT_PADDING = IMAGE_SIZE - IMAGE_PADDING * 2;
 
 export async function render(
   flagImage: Sharp,
@@ -15,7 +16,7 @@ export async function render(
 
   const resizedAvatar = mask
     ? avatar
-    : await resize(circleAvatar, IMAGE_SIZE - IMAGE_PADDING * 2);
+    : await resize(circleAvatar, IMAGE_SIZE_WITHOUT_PADDING);
 
   const compositeImage = await createComposite(
     blendedFlagImage,
