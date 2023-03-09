@@ -50,14 +50,14 @@ export default new Command()
 		const mask = interaction.options.getBoolean("mask", false) ?? false;
 		const blend = interaction.options.getBoolean("blend", false) ?? false;
 
-		const avatarURL =
+		const avatarUrl =
 			avatarAttachment?.url ??
 			interaction.user.avatarURL({
 				extension: "png",
 				size: 1024
 			});
 
-		if (!avatarURL) {
+		if (!avatarUrl) {
 			interaction.followUp({
 				ephemeral: true,
 				content: "You must provide an avatar or have a valid avatar"
@@ -66,9 +66,7 @@ export default new Command()
 			return;
 		}
 
-		const avatar = await getImageFromUrl(avatarURL);
-
-		let flag: Sharp | undefined;
+		const avatar = await getImageFromUrl(avatarUrl);
 
 		if (flagString && image) {
 			interaction.followUp({
