@@ -1,4 +1,35 @@
-import sharp, { Sharp } from "sharp";
+import sharp, { type Blend, Sharp } from "sharp";
+
+const IMAGE_SIZE = 1024;
+const IMAGE_PADDING = 40;
+
+export async function render(
+  flagImage: Sharp,
+  avatar: Sharp,
+  mask: boolean,
+  blend: boolean
+): Promise<Sharp> {
+  const blendedFlagImage = blend ? flagImage.blur(25) : flagImage;
+
+  const circleAvatar = await createCircle(avatar);
+
+  const resizedAvatar = await resize(
+    circleAvatar,
+    IMAGE_SIZE - IMAGE_PADDING * 2
+  );
+
+  const compositeImage = await createComposite(
+    blendedFlagImage,
+    await resizedAvatar.toBuffer(),
+    mask ? "multiply" : "over",
+    true,
+    mask ? 0 : IMAGE_PADDING
+  );
+
+  const circle = await createCircle(compositeImage);
+
+  return circle;
+}
 
 export async function getImageFromURL(url: string): Promise<Sharp> {
   const response = await fetch(url);
@@ -11,73 +42,70 @@ export async function getImageFromURL(url: string): Promise<Sharp> {
   const arrayBuffer = await response.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
 
-  const image = sharp(buffer);
-  return image;
+  const image = sharp(buffer).png();
+
+  const resizedImage = await resize(image, IMAGE_SIZE, false);
+  return resizedImage;
 }
 
-async function circle(image: Sharp): Promise<Sharp> {
-  const metadata = await image.metadata();
+async function createComposite(
+  image: Sharp,
+  input: Buffer,
+  blend: Blend,
+  refreshImage = true,
+  padding = 0
+): Promise<Sharp> {
+  const refreshedImage = refreshImage ? await refresh(image) : image;
 
-  const width = metadata.width ?? 1024;
-
-  const radius = width / 2;
-
-  const circleSvg = Buffer.from(
-    `<svg><circle cx="${radius}" cy="${radius}" r="${radius}" /></svg>`
-  );
-
-  const composite = image.composite([
+  const composite = refreshedImage.composite([
     {
-      input: circleSvg,
-      blend: "dest-in"
+      input,
+      blend,
+      top: padding,
+      left: padding
     }
   ]);
 
   return composite;
 }
 
-async function refresh(image: Sharp): Promise<Sharp> {
-  return sharp(await image.toBuffer());
+async function createCircle(image: Sharp, refreshImage = true): Promise<Sharp> {
+  const refreshedImage = refreshImage ? await refresh(image) : image;
+
+  const metadata = await refreshedImage.metadata();
+
+  const width = metadata.width ?? IMAGE_SIZE;
+
+  const radius = width / 2;
+
+  const circleSvg = Buffer.from(
+    `<svg><circle cx="50%" cy="50%" r="${radius}" /></svg>`
+  );
+
+  const composite = await createComposite(
+    refreshedImage,
+    circleSvg,
+    "dest-in",
+    false
+  );
+
+  return composite;
 }
 
-export async function render(
-  flag: Sharp,
-  avatar: Sharp,
-  mask: boolean,
-  blend: boolean
+async function resize(
+  image: Sharp,
+  size: number,
+  refreshImage = true
 ): Promise<Sharp> {
-  if (blend) {
-    flag = flag.blur(25);
-  }
+  const refreshedImage = refreshImage ? await refresh(image) : image;
 
-  if (mask) {
-    avatar = await circle(avatar);
-    avatar = await refresh(avatar);
+  const resized = refreshedImage.resize(size, size);
 
-    flag = flag.composite([
-      {
-        input: await avatar.toBuffer(),
-        blend: "multiply"
-      }
-    ]);
-  } else {
-    avatar = await circle(avatar);
-    avatar = await refresh(avatar);
-    avatar = avatar.resize(944, 944, {
-      fit: "cover"
-    });
-    avatar = await refresh(avatar);
+  return resized;
+}
 
-    flag = flag.composite([
-      {
-        input: await avatar.toBuffer(),
-        top: 40,
-        left: 40
-      }
-    ]);
-  }
+async function refresh(image: Sharp): Promise<Sharp> {
+  const refreshedImage = sharp(await image.toBuffer());
 
-  flag = await refresh(flag);
-
-  return circle(flag);
+  return refreshedImage;
 }
