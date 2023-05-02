@@ -1,4 +1,4 @@
-import { Client, ClientOptions } from "fero-dc";
+import { Client, type ClientOptions } from "fero-dc";
 
 import { config } from "dotenv";
 config();

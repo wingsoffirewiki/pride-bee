@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import { Command } from "fero-dc";
 import { toPascalCase } from "../util/casing";
 import {
-	Flag,
+	type Flag,
 	flagsSorted,
 	getFlagImage,
 	getFlagNameFromAlias

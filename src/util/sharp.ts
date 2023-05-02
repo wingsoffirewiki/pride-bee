@@ -1,4 +1,4 @@
-import sharp, { type Blend, Sharp } from "sharp";
+import sharp, { type Blend, type Sharp } from "sharp";
 
 const IMAGE_SIZE = 1024;
 const IMAGE_PADDING = 40;
