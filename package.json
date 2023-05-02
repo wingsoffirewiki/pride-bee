@@ -13,8 +13,8 @@
   "scripts": {
     "start": "node --experimental-specifier-resolution=node --enable-source-maps .",
     "dev": "nodemon",
-    "build": "pnpm swc && pnpm tsc",
-    "tsc": "tsc --noEmit",
+    "build": "pnpm swc && pnpm type-check",
+    "type-check": "tsc --noEmit",
     "swc": "swc src --copy-files --config-file \".swcrc\" -d \"dist\"",
     "pretty": "prettier --check \"src/**/*.ts\"",
     "pretty-fix": "prettier --write \"src/**/*.ts\"",
