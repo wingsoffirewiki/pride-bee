@@ -1,7 +1,3 @@
-# Yarn
-.yarn/cache
-install-state.gz
-
 # Logs
 logs
 *.log

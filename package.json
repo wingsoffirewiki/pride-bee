@@ -6,10 +6,14 @@
   "author": "wofwiki <wings.of.fire.fandom.wiki@gmail.com>",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": "18.16.0",
+    "pnpm": "8.3.1"
+  },
   "scripts": {
     "start": "node --experimental-specifier-resolution=node --enable-source-maps .",
     "dev": "nodemon",
-    "build": "yarn swc && yarn tsc",
+    "build": "pnpm swc && pnpm tsc",
     "tsc": "tsc --noEmit",
     "swc": "swc src --copy-files --config-file \".swcrc\" -d \"dist\"",
     "pretty": "prettier --check \"src/**/*.ts\"",
@@ -39,5 +43,5 @@
     "ts-node": "10.9.1",
     "typescript": "4.9.5"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "pnpm@8.3.1"
 }
