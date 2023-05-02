@@ -1,18 +1,19 @@
 {
-  "$schema": "https://json.schemastore.org/swcrc",
-  "jsc": {
-    "experimental": {
-      "keepImportAssertions": true
-    },
-    "parser": {
-      "syntax": "typescript",
-      "dynamicImport": true
-    },
-    "target": "es2022"
-  },
-  "module": {
-    "type": "es6",
-    "strictMode": true
-  },
-  "sourceMaps": true
+	"$schema": "https://json.schemastore.org/swcrc",
+	"jsc": {
+		"experimental": {
+			"keepImportAssertions": true
+		},
+		"parser": {
+			"syntax": "typescript",
+			"dynamicImport": true,
+			"importAssertions": true
+		},
+		"target": "esnext"
+	},
+	"module": {
+		"type": "es6",
+		"strictMode": true
+	},
+	"sourceMaps": true
 }
