@@ -1,11 +1,11 @@
-import * as Discord from "discord.js";
 import { Command } from "@ferod/client";
+import * as Discord from "discord.js";
 import { toPascalCase } from "../util/casing";
 import {
-	type Flag,
 	flagsSorted,
 	getFlagImage,
-	getFlagNameFromAlias
+	getFlagNameFromAlias,
+	type Flag
 } from "../util/flags";
 
 export default new Command()
