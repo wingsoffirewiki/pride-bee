@@ -18,14 +18,14 @@
 		"lint-fix": "eslint --fix \"src/**/*.{ts,js,tsx}\""
 	},
 	"dependencies": {
-		"@ferod/client": "^0.1.6",
+		"@ferod/client": "^0.1.8",
 		"chalk": "^5.2.0",
 		"discord.js": "^14.11.0",
 		"dotenv": "^16.0.3",
 		"sharp": "^0.32.1"
 	},
 	"devDependencies": {
-		"@ferod/create": "^0.1.6",
+		"@ferod/create": "^0.1.8",
 		"@types/node": "^20.1.0",
 		"@typescript-eslint/eslint-plugin": "^5.59.2",
 		"@typescript-eslint/parser": "^5.59.2",

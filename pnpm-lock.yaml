@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@ferod/client':
-    specifier: ^0.1.6
-    version: 0.1.6
+    specifier: ^0.1.8
+    version: 0.1.8
   chalk:
     specifier: ^5.2.0
     version: 5.2.0
@@ -19,8 +19,8 @@ dependencies:
 
 devDependencies:
   '@ferod/create':
-    specifier: ^0.1.6
-    version: 0.1.6
+    specifier: ^0.1.8
+    version: 0.1.8
   '@types/node':
     specifier: ^20.1.0
     version: 20.1.0
@@ -154,22 +154,21 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@ferod/client@0.1.6:
-    resolution: {integrity: sha512-WL9x39iYFfmXJH+1TdVtT51iQW4ZQfz8WxrbcwdUYYnZ9M+CIZ+I5MJTttQQCPsIVkCelgkAgH4mDuBBppeY1w==}
+  /@ferod/client@0.1.8:
+    resolution: {integrity: sha512-kZl1qTkrkc+oygdeom9hxmWbtDJW0neGnmaCl83lJQKFT/5ws2hJsJeESdCn8rkXBWpjG29nIqnJ/SaBpW8UlQ==}
     engines: {node: 18.16.0, pnpm: 8.4.0}
     dependencies:
       chalk: 5.2.0
       discord.js: 14.11.0
       glob: 10.2.2
       remeda: 1.14.0
-      superjson: 1.12.3
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
     dev: false
 
-  /@ferod/create@0.1.6:
-    resolution: {integrity: sha512-0bglbU8sWRBnzT3A6MFG47CNd8MB992+p7K9Apg4cBeA3XpnOXmDjL5xfXXQDV+RYceLSIujPK1/KnEb3V9wCw==}
+  /@ferod/create@0.1.8:
+    resolution: {integrity: sha512-V3jDe9gYK5XqoIDWEAHFAvZvJUmlVJ+jbbmoMnuXjuZRHeY2s4HGCXcxzPe89mxELsy8sqqzpsVnYtElhPxEvw==}
     engines: {node: 18.16.0, pnpm: 8.4.0}
     hasBin: true
     dependencies:
@@ -665,13 +664,6 @@ packages:
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
-
-  /copy-anything@3.0.4:
-    resolution: {integrity: sha512-MaQ9FwzlZ/KLeVCLhzI3rZw0EhrIryfZa3AyT4agVybR0DjlkDHA8898lamLD6kfkf9MMn8D+zDAUR4+GxaymQ==}
-    engines: {node: '>=12.13'}
-    dependencies:
-      is-what: 4.1.9
-    dev: false
 
   /create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
@@ -1272,11 +1264,6 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /is-what@4.1.9:
-    resolution: {integrity: sha512-I3FU0rkVvwhgLLEs6iITwZ/JaLXe7tQcHyzupXky8jigt1vu4KM0UOqDr963j36JRvJ835EATVIm6MnGz/i1/g==}
-    engines: {node: '>=12.13'}
-    dev: false
-
   /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
@@ -1855,13 +1842,6 @@ packages:
     dependencies:
       '@tokenizer/token': 0.3.0
       peek-readable: 5.0.0
-
-  /superjson@1.12.3:
-    resolution: {integrity: sha512-0j+U70KUtP8+roVPbwfqkyQI7lBt7ETnuA7KXbTDX3mCKiD/4fXs2ldKSMdt0MCfpTwiMxo20yFU3vu6ewETpQ==}
-    engines: {node: '>=10'}
-    dependencies:
-      copy-anything: 3.0.4
-    dev: false
 
   /supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
