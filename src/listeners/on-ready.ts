@@ -1,13 +1,15 @@
-import { ActivityType } from "discord.js";
-import { Client, EventListener } from "fero-dc";
+import { EventListener, Client } from "@ferod/client";
+import { ActivityType, Events } from "discord.js";
 import * as fs from "fs";
-import { flagsSorted } from "../util/flags";
+import { flagsSorted } from "../util/flags.js";
 
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 
-export default new EventListener<"ready">()
-	.setEvent("ready")
+export default new EventListener()
+	.setEvent(Events.ClientReady)
 	.setHandler(async (client) => {
+		console.log(`Logged in as ${client.user.tag}`);
+
 		setPresence(client);
 		setInterval(() => setPresence(client), HOUR_IN_MILLISECONDS);
 

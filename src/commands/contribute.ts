@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command } from "fero-dc";
+import { Command } from "@ferod/client";
 
 const repoLink = "https://github.com/wingsoffirewiki/Pride-Bee";
 

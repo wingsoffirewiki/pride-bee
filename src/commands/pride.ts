@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command } from "fero-dc";
+import { Command } from "@ferod/client";
 import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
 import { getImageFromUrl, render } from "../util/sharp";

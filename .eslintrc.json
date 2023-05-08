@@ -1,26 +1,45 @@
 {
-	"parser": "@typescript-eslint/parser",
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"eslint:recommended",
-		"prettier"
-	],
+	"extends": ["eslint:recommended", "prettier"],
+	"plugins": ["prettier"],
 	"env": {
-		"es2022": true,
+		"es6": true,
 		"node": true,
 		"browser": true
 	},
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": "latest"
+	},
 	"rules": {
 		"prettier/prettier": "error",
-		"indent": ["error", "tab", { "SwitchCase": 1 }],
-		"no-unused-vars": "off",
-		"@typescript-eslint/no-unused-vars": "error",
-		"no-redeclare": "off",
-		"@typescript-eslint/no-redeclare": "error",
-		"@typescript-eslint/no-import-type-side-effects": "error",
 		"curly": ["error", "all"],
 		"quotes": ["error", "double"]
 	},
-	"plugins": ["prettier"]
+	"overrides": [
+		{
+			"files": ["*.ts", "*.tsx"],
+			"parser": "@typescript-eslint/parser",
+			"extends": ["plugin:@typescript-eslint/recommended"],
+			"rules": {
+				"no-redeclare": "off",
+				"@typescript-eslint/no-redeclare": "error",
+				"no-unused-vars": "off",
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						"argsIgnorePattern": "^_"
+					}
+				],
+				"@typescript-eslint/explicit-function-return-type": [
+					"error",
+					{
+						"allowExpressions": true,
+						"allowTypedFunctionExpressions": true,
+						"allowHigherOrderFunctions": true
+					}
+				],
+				"@typescript-eslint/no-import-type-side-effects": "error"
+			}
+		}
+	]
 }
