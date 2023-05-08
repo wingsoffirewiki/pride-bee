@@ -2,8 +2,11 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@ferod/client':
-    specifier: ^0.1.5
-    version: 0.1.5
+    specifier: ^0.1.6
+    version: 0.1.6
+  chalk:
+    specifier: ^5.2.0
+    version: 5.2.0
   discord.js:
     specifier: ^14.11.0
     version: 14.11.0
@@ -16,8 +19,8 @@ dependencies:
 
 devDependencies:
   '@ferod/create':
-    specifier: ^0.1.5
-    version: 0.1.5
+    specifier: ^0.1.6
+    version: 0.1.6
   '@types/node':
     specifier: ^20.1.0
     version: 20.1.0
@@ -151,8 +154,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@ferod/client@0.1.5:
-    resolution: {integrity: sha512-L7AHq/w9xhgHuS5ryL3BfWTeY0QNzC8M8Gymbt04Ve3fBFXgQqKt6Vo/1xkfdOcKz7NNpDl/hqSd1+n7wpSbKQ==}
+  /@ferod/client@0.1.6:
+    resolution: {integrity: sha512-WL9x39iYFfmXJH+1TdVtT51iQW4ZQfz8WxrbcwdUYYnZ9M+CIZ+I5MJTttQQCPsIVkCelgkAgH4mDuBBppeY1w==}
     engines: {node: 18.16.0, pnpm: 8.4.0}
     dependencies:
       chalk: 5.2.0
@@ -165,8 +168,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@ferod/create@0.1.5:
-    resolution: {integrity: sha512-3D14G9pws/lM9u9o8DECxLFhXabefXw/rowtL/tEzll5lxTxkbrvqUXeClaD8HvlsMj46vBeKTe/i2ntK1TisQ==}
+  /@ferod/create@0.1.6:
+    resolution: {integrity: sha512-0bglbU8sWRBnzT3A6MFG47CNd8MB992+p7K9Apg4cBeA3XpnOXmDjL5xfXXQDV+RYceLSIujPK1/KnEb3V9wCw==}
     engines: {node: 18.16.0, pnpm: 8.4.0}
     hasBin: true
     dependencies:
