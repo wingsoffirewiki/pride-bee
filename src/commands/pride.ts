@@ -55,6 +55,14 @@ export default new Command()
 			return;
 		}
 		const avatarAttachment = interaction.options.getAttachment("avatar", false);
+		if (avatarAttachment && !isValidImage(avatarAttachment)) {
+			await interaction.followUp({
+				ephemeral: true,
+				content: "Invalid image!"
+			});
+
+			return;
+		}
 		const mask = interaction.options.getBoolean("mask", false) ?? false;
 		const blend = interaction.options.getBoolean("blend", false) ?? false;
 
