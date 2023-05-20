@@ -2,7 +2,7 @@ import { Command } from "@ferod/client";
 import * as Discord from "discord.js";
 import { toPascalCase } from "../util/casing";
 import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
-import { getImageFromUrl, render } from "../util/sharp";
+import { getImageFromUrl, isValidImage, render } from "../util/sharp";
 
 export default new Command()
 	.setName("pride")
@@ -46,6 +46,14 @@ export default new Command()
 
 		const flagString = interaction.options.getString("flag", false);
 		const image = interaction.options.getAttachment("image", false);
+		if (image && !isValidImage(image)) {
+			await interaction.followUp({
+				ephemeral: true,
+				content: "Invalid image!"
+			});
+
+			return;
+		}
 		const avatarAttachment = interaction.options.getAttachment("avatar", false);
 		const mask = interaction.options.getBoolean("mask", false) ?? false;
 		const blend = interaction.options.getBoolean("blend", false) ?? false;
