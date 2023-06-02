@@ -19,7 +19,7 @@ export default new Command()
 				)
 				.setColor("Random");
 
-			interaction.reply({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 		} catch (error) {
 			console.error(error);
 		}
