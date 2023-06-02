@@ -177,6 +177,7 @@ export default new Command()
 				});
 			}
 		} catch (error) {
+			console.log(interaction.guildId);
 			console.error(error);
 		}
 	});

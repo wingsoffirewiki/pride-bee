@@ -133,6 +133,7 @@ export default new Command()
 				files: [attachment],
 			});
 		} catch (error) {
+			console.log(interaction.guildId);
 			console.error(error);
 		}
 	});

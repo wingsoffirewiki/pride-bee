@@ -8,7 +8,7 @@ export default new Command()
 	.setDescription("Shows GitHub link to contribute to the bot")
 	.setCategory("Utility")
 	.setPermissions(Discord.PermissionFlagsBits.SendMessages)
-	.setExecutor((client, interaction) => {
+	.setExecutor(async (client, interaction) => {
 		try {
 			const embed = new Discord.EmbedBuilder();
 
@@ -21,6 +21,7 @@ export default new Command()
 
 			await interaction.reply({ embeds: [embed] });
 		} catch (error) {
+			console.log(interaction.guildId);
 			console.error(error);
 		}
 	});

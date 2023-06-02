@@ -123,6 +123,7 @@ export default new Command()
 				embeds: [embed],
 			});
 		} catch (error) {
+			console.log(interaction.guildId);
 			console.error(error);
 		}
 	});
