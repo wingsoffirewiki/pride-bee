@@ -53,7 +53,7 @@ export default new Command()
 				.setThumbnail(client.user.avatarURL())
 				.setTimestamp()
 				.setFooter({
-					text: "Ferod",
+					text: "Pride Bee",
 					iconURL: client.user.avatarURL() ?? undefined,
 				});
 
