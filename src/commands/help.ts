@@ -34,7 +34,12 @@ export default new Command()
 	})
 	.setExecutor(async (client, interaction) => {
 		try {
-			await interaction.deferReply({
+			// TODO: Replace with deferReply when stable
+			// await interaction.deferReply({
+			// 	ephemeral: true,
+			// });
+			await interaction.reply({
+				content: "Loading help...",
 				ephemeral: true,
 			});
 
@@ -53,7 +58,7 @@ export default new Command()
 				.setThumbnail(client.user.avatarURL())
 				.setTimestamp()
 				.setFooter({
-					text: "Ferod",
+					text: "Pride Bee",
 					iconURL: client.user.avatarURL() ?? undefined,
 				});
 
@@ -119,7 +124,12 @@ export default new Command()
 					.addFields(commandFields);
 			}
 
-			await interaction.followUp({
+			// TODO: Replace with followUp when stable
+			// await interaction.followUp({
+			// 	embeds: [embed],
+			// });
+			await interaction.editReply({
+				content: "",
 				embeds: [embed],
 			});
 		} catch (error) {
