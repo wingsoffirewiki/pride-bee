@@ -13,32 +13,32 @@ export default new Command()
 			name: "flag",
 			description: "The flag to attach",
 			type: Discord.ApplicationCommandOptionType.String,
-			required: false
+			required: false,
 		},
 		{
 			name: "image",
 			description: "The image to use as a flag instead of the flag option",
 			type: Discord.ApplicationCommandOptionType.Attachment,
-			required: false
+			required: false,
 		},
 		{
 			name: "avatar",
 			description: "The image to use as the avatar",
 			type: Discord.ApplicationCommandOptionType.Attachment,
-			required: false
+			required: false,
 		},
 		{
 			name: "mask",
 			description: "Whether to mask the flag over the avatar",
 			type: Discord.ApplicationCommandOptionType.Boolean,
-			required: false
+			required: false,
 		},
 		{
 			name: "blend",
 			description: "Whether to blend the flag and blur the lines",
 			type: Discord.ApplicationCommandOptionType.Boolean,
-			required: false
-		}
+			required: false,
+		},
 	)
 	.setPermissions(Discord.PermissionFlagsBits.SendMessages)
 	.setExecutor(async (client, interaction) => {
@@ -49,7 +49,7 @@ export default new Command()
 		if (image && !isValidImage(image)) {
 			await interaction.followUp({
 				ephemeral: true,
-				content: "Invalid image!"
+				content: "Invalid image!",
 			});
 
 			return;
@@ -58,7 +58,7 @@ export default new Command()
 		if (avatarAttachment && !isValidImage(avatarAttachment)) {
 			await interaction.followUp({
 				ephemeral: true,
-				content: "Invalid image!"
+				content: "Invalid image!",
 			});
 
 			return;
@@ -70,13 +70,13 @@ export default new Command()
 			avatarAttachment?.url ??
 			interaction.user.avatarURL({
 				extension: "png",
-				size: 1024
+				size: 1024,
 			});
 
 		if (!avatarUrl) {
 			interaction.followUp({
 				ephemeral: true,
-				content: "You must provide an avatar or have a valid avatar"
+				content: "You must provide an avatar or have a valid avatar",
 			});
 
 			return;
@@ -87,7 +87,7 @@ export default new Command()
 		if (flagString && image) {
 			interaction.followUp({
 				ephemeral: true,
-				content: "You can only use one of the flag or image options!"
+				content: "You can only use one of the flag or image options!",
 			});
 
 			return;
@@ -100,7 +100,7 @@ export default new Command()
 		if (!flag) {
 			interaction.followUp({
 				ephemeral: true,
-				content: "Invalid flag!"
+				content: "Invalid flag!",
 			});
 
 			return;
@@ -122,7 +122,7 @@ export default new Command()
 
 		embed
 			.setTitle(
-				flagName ? `Pride With ${toPascalCase(flagName)} Flag` : "Pride"
+				flagName ? `Pride With ${toPascalCase(flagName)} Flag` : "Pride",
 			)
 			.setDescription("Here you go!")
 			.setImage(`attachment://${fileName}`)
@@ -130,6 +130,6 @@ export default new Command()
 
 		interaction.followUp({
 			embeds: [embed],
-			files: [attachment]
+			files: [attachment],
 		});
 	});

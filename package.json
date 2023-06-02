@@ -12,8 +12,6 @@
 		"dev": "nodemon",
 		"build": "tsc",
 		"start": "node --experimental-specifier-resolution=node dist --enable-source-maps",
-		"pretty": "prettier --check \"src/**/*.{ts,js,tsx,scss,css}\"",
-		"pretty-fix": "prettier --write \"src/**/*.{ts,js,tsx,scss,css}\"",
 		"lint": "eslint \"src/**/*.{ts,js,tsx}\"",
 		"lint-fix": "eslint --fix \"src/**/*.{ts,js,tsx}\""
 	},
@@ -30,10 +28,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.59.8",
 		"@typescript-eslint/parser": "^5.59.8",
 		"eslint": "^8.41.0",
-		"eslint-config-prettier": "^8.8.0",
-		"eslint-plugin-prettier": "^4.2.1",
 		"nodemon": "^2.0.22",
-		"prettier": "2.8.8",
 		"ts-node": "^10.9.1",
 		"typescript": "^5.1.3"
 	},

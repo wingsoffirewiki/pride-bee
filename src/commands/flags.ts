@@ -6,13 +6,13 @@ import {
 	ButtonBuilder,
 	ButtonStyle,
 	ComponentType,
-	EmbedBuilder
+	EmbedBuilder,
 } from "discord.js";
 import {
 	flagsSorted,
 	getFlagImage,
 	getFlagNameFromAlias,
-	type Flag
+	type Flag,
 } from "../util/flags";
 
 const flagEntries = Object.entries(flagsSorted);
@@ -26,7 +26,7 @@ export default new Command()
 		{
 			name: "list",
 			description: "List all flags",
-			type: ApplicationCommandOptionType.Subcommand
+			type: ApplicationCommandOptionType.Subcommand,
 		},
 		{
 			name: "preview",
@@ -37,10 +37,10 @@ export default new Command()
 					name: "flag",
 					description: "The flag to view",
 					type: ApplicationCommandOptionType.String,
-					required: false
-				}
-			]
-		}
+					required: false,
+				},
+			],
+		},
 	)
 	.setExecutor(async (client, interaction) => {
 		const subCommand = interaction.options.getSubcommand(true);
@@ -49,17 +49,16 @@ export default new Command()
 			const embed = new EmbedBuilder();
 
 			const flags = flagEntries.map(
-				(entry, index) => `${index + 1}: \`${entry.flat().join(", ")}\``
+				(entry, index) => `${index + 1}: \`${entry.flat().join(", ")}\``,
 			);
 
 			embed
 				.setTitle("Flags")
 				.setDescription(
-					`Here are all **${
-						flags.length
+					`Here are all **${flags.length
 					}** flags I currently support!\nDo /flags preview [flag] to view the flag.\nIf you want to suggest/add a flag, please use /contribute.\n\n${flags.join(
-						"\n"
-					)}`
+						"\n",
+					)}`,
 				)
 				.setColor("Random");
 
@@ -67,11 +66,11 @@ export default new Command()
 		} else if (subCommand === "preview") {
 			let flagName =
 				getFlagNameFromAlias(
-					interaction.options.getString("flag", false) ?? firstFlag
+					interaction.options.getString("flag", false) ?? firstFlag,
 				) ?? firstFlag;
 
 			const attachment = new AttachmentBuilder(getFlagImage(flagName)).setName(
-				`${flagName}.png`
+				`${flagName}.png`,
 			);
 
 			const embed = new EmbedBuilder()
@@ -82,7 +81,7 @@ export default new Command()
 			if (interaction.channel === null) {
 				await interaction.reply({
 					embeds: [embed],
-					files: [attachment]
+					files: [attachment],
 				});
 
 				return;
@@ -90,7 +89,7 @@ export default new Command()
 
 			const [previousId, nextId] = [
 				`previous-${interaction.id}`,
-				`next-${interaction.id}`
+				`next-${interaction.id}`,
 			];
 
 			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
@@ -101,13 +100,13 @@ export default new Command()
 				new ButtonBuilder()
 					.setCustomId(nextId)
 					.setLabel("Next")
-					.setStyle(ButtonStyle.Secondary)
+					.setStyle(ButtonStyle.Secondary),
 			);
 
 			await interaction.reply({
 				embeds: [embed],
 				components: [row],
-				files: [attachment]
+				files: [attachment],
 			});
 
 			const collector = interaction.channel?.createMessageComponentCollector({
@@ -118,19 +117,19 @@ export default new Command()
 					[previousId, nextId].includes(buttonInteraction.customId) &&
 					buttonInteraction.applicationId === interaction.applicationId,
 				dispose: true,
-				idle: 60 * 1000
+				idle: 60 * 1000,
 			});
 
 			collector.on("collect", async (buttonInteraction) => {
 				const currentIndex = flagEntries.findIndex(
-					(entry) => entry[0] === flagName
+					(entry) => entry[0] === flagName,
 				);
 
 				if (buttonInteraction.customId === previousId) {
 					if (currentIndex <= 0) {
 						await buttonInteraction.reply({
 							ephemeral: true,
-							content: "There are no more flags before this one."
+							content: "There are no more flags before this one.",
 						});
 
 						return;
@@ -141,7 +140,7 @@ export default new Command()
 					if (currentIndex >= flagEntries.length - 1) {
 						await buttonInteraction.reply({
 							ephemeral: true,
-							content: "There are no more flags after this one."
+							content: "There are no more flags after this one.",
 						});
 
 						return;
@@ -150,8 +149,8 @@ export default new Command()
 					flagName = flagEntries[currentIndex + 1][0] as Flag;
 				}
 
-				const attachment = new AttachmentBuilder(
-					getFlagImage(flagName)
+				const newAttachment = new AttachmentBuilder(
+					getFlagImage(flagName),
 				).setName(`${flagName}.png`);
 
 				embed
@@ -160,13 +159,13 @@ export default new Command()
 
 				await buttonInteraction.update({
 					embeds: [embed],
-					files: [attachment]
+					files: [newAttachment],
 				});
 			});
 		} else {
 			await interaction.reply({
 				ephemeral: true,
-				content: "Invalid subcommand"
+				content: "Invalid subcommand",
 			});
 		}
 	});

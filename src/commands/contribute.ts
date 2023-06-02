@@ -14,7 +14,7 @@ export default new Command()
 		embed
 			.setTitle("Contribute")
 			.setDescription(
-				`You can contribute to the bot by opening an issue or creating a pull request on GitHub.\n\n[GitHub Repository](${repoLink})\n[Issues](${repoLink}/issues)\n[Pull Requests](${repoLink}/pulls)`
+				`You can contribute to the bot by opening an issue or creating a pull request on GitHub.\n\n[GitHub Repository](${repoLink})\n[Issues](${repoLink}/issues)\n[Pull Requests](${repoLink}/pulls)`,
 			)
 			.setColor("Random");
 

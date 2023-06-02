@@ -13,7 +13,7 @@ export async function render(
 	flagImage: Sharp,
 	avatar: Sharp,
 	mask: boolean,
-	blend: boolean
+	blend: boolean,
 ): Promise<Sharp> {
 	const blendedFlagImage = blend ? flagImage.blur(25) : flagImage;
 
@@ -28,7 +28,7 @@ export async function render(
 		await resizedAvatar.toBuffer(),
 		mask ? "multiply" : "over",
 		true,
-		mask ? 0 : IMAGE_PADDING
+		mask ? 0 : IMAGE_PADDING,
 	);
 
 	const circle = await createCircle(compositeImage);
@@ -40,7 +40,7 @@ export async function getImageFromUrl(url: string): Promise<Sharp> {
 	const response = await fetch(url);
 	if (!response.ok) {
 		throw new Error(
-			`Failed to fetch image from ${url}: ${response.statusText}`
+			`Failed to fetch image from ${url}: ${response.statusText}`,
 		);
 	}
 
@@ -58,7 +58,7 @@ async function createComposite(
 	input: Buffer,
 	blend: Blend,
 	refreshImage = true,
-	padding = 0
+	padding = 0,
 ): Promise<Sharp> {
 	const refreshedImage = refreshImage ? await refresh(image) : image;
 
@@ -67,8 +67,8 @@ async function createComposite(
 			input,
 			blend,
 			top: padding,
-			left: padding
-		}
+			left: padding,
+		},
 	]);
 
 	return composite;
@@ -84,14 +84,14 @@ async function createCircle(image: Sharp, refreshImage = true): Promise<Sharp> {
 	const radius = width / 2;
 
 	const circleSvg = Buffer.from(
-		`<svg><circle cx="50%" cy="50%" r="${radius}" /></svg>`
+		`<svg><circle cx="50%" cy="50%" r="${radius}" /></svg>`,
 	);
 
 	const composite = await createComposite(
 		refreshedImage,
 		circleSvg,
 		"dest-in",
-		false
+		false,
 	);
 
 	return composite;
@@ -100,7 +100,7 @@ async function createCircle(image: Sharp, refreshImage = true): Promise<Sharp> {
 async function resize(
 	image: Sharp,
 	size: number,
-	refreshImage = true
+	refreshImage = true,
 ): Promise<Sharp> {
 	const refreshedImage = refreshImage ? await refresh(image) : image;
 

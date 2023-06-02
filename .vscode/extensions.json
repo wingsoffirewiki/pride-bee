@@ -1,8 +1,7 @@
 {
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "ms-vscode.vscode-typescript-next",
-    "mikestead.dotenv"
-  ]
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"ms-vscode.vscode-typescript-next",
+		"dotenv.dotenv-vscode"
+	]
 }

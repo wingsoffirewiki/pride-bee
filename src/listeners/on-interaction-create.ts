@@ -15,18 +15,18 @@ export default new EventListener()
 
 		try {
 			command.executor(client, interaction);
-		} catch (error) {
-			console.error(error);
+		} catch (replyError) {
+			console.error(replyError);
 			await interaction
 				.reply({
 					content: "There was an error while executing this command!",
-					ephemeral: true
+					ephemeral: true,
 				})
-				.catch((error) => {
-					console.error(error);
+				.catch((followUpError) => {
+					console.error(followUpError);
 					return interaction.followUp({
 						content: "There was an error while executing this command!",
-						ephemeral: true
+						ephemeral: true,
 					});
 				})
 				.catch(console.error);

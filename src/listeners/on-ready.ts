@@ -25,9 +25,9 @@ function setPresence(client: Client<true>): void {
 		activities: [
 			{
 				name: `/pride in ${client.guilds.cache.size} servers.`,
-				type: ActivityType.Watching
-			}
-		]
+				type: ActivityType.Watching,
+			},
+		],
 	});
 }
 

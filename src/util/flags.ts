@@ -15,7 +15,7 @@ export function getFlagImage(flag: Flag | string): Sharp | undefined {
 	const flagPath = resolve(
 		process.cwd(),
 		"./assets/flags",
-		`${getFlagNameFromAlias(flag)}.png`
+		`${getFlagNameFromAlias(flag)}.png`,
 	);
 
 	if (!fs.existsSync(flagPath)) {
@@ -35,6 +35,6 @@ function sortFlags(): Flags {
 
 export function getFlagNameFromAlias(alias: string): Flag | undefined {
 	return (Object.keys(flags) as Flag[]).find((flag) =>
-		[flag, ...flags[flag]].includes(alias)
+		[flag, ...flags[flag]].includes(alias),
 	);
 }

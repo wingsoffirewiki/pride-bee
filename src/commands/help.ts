@@ -5,7 +5,7 @@ import {
 	Collection,
 	EmbedBuilder,
 	PermissionFlagsBits,
-	type EmbedField
+	type EmbedField,
 } from "discord.js";
 
 /**
@@ -30,11 +30,11 @@ export default new Command()
 		name: "command",
 		description: "The command to receive help for",
 		type: ApplicationCommandOptionType.String,
-		required: false
+		required: false,
 	})
 	.setExecutor(async (client, interaction) => {
 		await interaction.deferReply({
-			ephemeral: true
+			ephemeral: true,
 		});
 
 		const commandName = interaction.options.getString("command");
@@ -47,36 +47,36 @@ export default new Command()
 			.setColor("Random")
 			.setAuthor({
 				name: author.username,
-				iconURL: author.avatarURL() ?? undefined
+				iconURL: author.avatarURL() ?? undefined,
 			})
 			.setThumbnail(client.user.avatarURL())
 			.setTimestamp()
 			.setFooter({
 				text: "Ferod",
-				iconURL: client.user.avatarURL() ?? undefined
+				iconURL: client.user.avatarURL() ?? undefined,
 			});
 
 		if (command !== null) {
 			embed
 				.setDescription(
-					`Here are all the properties for the ${command.name} command!`
+					`Here are all the properties for the ${command.name} command!`,
 				)
 				.addFields(
 					{
 						name: "Command Name",
 						value: command.name,
-						inline: true
+						inline: true,
 					},
 					{
 						name: "Command Description",
 						value: command.description,
-						inline: true
+						inline: true,
 					},
 					{
 						name: "Command Category",
 						value: toPascalCase(command.category),
-						inline: true
-					}
+						inline: true,
+					},
 				);
 
 			const usage = command.usage;
@@ -85,12 +85,12 @@ export default new Command()
 				embed.addFields(
 					{
 						name: "Command Usage",
-						value: usage
+						value: usage,
 					},
 					{
 						name: "Command Arguments",
-						value: args
-					}
+						value: args,
+					},
 				);
 			}
 		} else {
@@ -107,12 +107,10 @@ export default new Command()
 
 			const commandFields: EmbedField[] = commandsByCategory.map(
 				(commands, category) => {
-					const name = `${category}${
-						category.endsWith("Commands") ? "" : " Commands"
-					}`;
-					const value = commands.map((command) => command.name).join("\n");
+					const name = `${category}${category.endsWith("Commands") ? "" : " Commands"}`;
+					const value = commands.map((cmd) => cmd.name).join("\n");
 					return { name, value, inline: true };
-				}
+				},
 			);
 
 			embed
@@ -121,6 +119,6 @@ export default new Command()
 		}
 
 		await interaction.followUp({
-			embeds: [embed]
+			embeds: [embed],
 		});
 	});
