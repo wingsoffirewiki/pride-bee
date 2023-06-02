@@ -44,11 +44,7 @@ export default new Command()
 	.setPermissions(Discord.PermissionFlagsBits.SendMessages)
 	.setExecutor(async (client, interaction) => {
 		try {
-			// TODO: Replace with deferReply when stable
-			// await interaction.deferReply();
-			await interaction.reply({
-				content: "Loading pride...",
-			});
+			await interaction.deferReply();
 
 			const flagName = interaction.options.getString("flag", false);
 			const image = interaction.options.getAttachment("image", false);
@@ -80,12 +76,8 @@ export default new Command()
 			});
 
 			if (!avatarUrl) {
-				// TODO: Replace with followUp when stable
-				// await interaction.followUp({
-				// 	ephemeral: true,
-				// 	content: "You must provide an avatar or have a valid avatar",
-				// });
-				await interaction.editReply({
+				interaction.followUp({
+					ephemeral: true,
 					content: "You must provide an avatar or have a valid avatar",
 				});
 
@@ -95,12 +87,8 @@ export default new Command()
 			const avatar = await getImageFromUrl(avatarUrl);
 
 			if (flagName && image) {
-				// TODO: Replace with followUp when stable
-				// await interaction.followUp({
-				// 	ephemeral: true,
-				// 	content: "You can only use one of the flag or image options!",
-				// });
-				await interaction.editReply({
+				interaction.followUp({
+					ephemeral: true,
 					content: "You can only use one of the flag or image options!",
 				});
 
@@ -112,12 +100,8 @@ export default new Command()
 				: getFlagImage(flagName ?? "lgbt");
 
 			if (!flag) {
-				// TODO: Replace with followUp when stable
-				// await interaction.followUp({
-				// 	ephemeral: true,
-				// 	content: "Invalid flag!",
-				// });
-				await interaction.editReply({
+				interaction.followUp({
+					ephemeral: true,
 					content: "Invalid flag!",
 				});
 
@@ -144,13 +128,7 @@ export default new Command()
 				.setImage(`attachment://${fileName}`)
 				.setColor("Random");
 
-			// TODO: Replace with followUp when stable
-			// await interaction.followUp({
-			// 	embeds: [embed],
-			// 	files: [attachment],
-			// });
-			await interaction.editReply({
-				content: "",
+			interaction.followUp({
 				embeds: [embed],
 				files: [attachment],
 			});
