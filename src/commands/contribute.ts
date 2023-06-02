@@ -9,14 +9,18 @@ export default new Command()
 	.setCategory("Utility")
 	.setPermissions(Discord.PermissionFlagsBits.SendMessages)
 	.setExecutor((client, interaction) => {
-		const embed = new Discord.EmbedBuilder();
+		try {
+			const embed = new Discord.EmbedBuilder();
 
-		embed
-			.setTitle("Contribute")
-			.setDescription(
-				`You can contribute to the bot by opening an issue or creating a pull request on GitHub.\n\n[GitHub Repository](${repoLink})\n[Issues](${repoLink}/issues)\n[Pull Requests](${repoLink}/pulls)`,
-			)
-			.setColor("Random");
+			embed
+				.setTitle("Contribute")
+				.setDescription(
+					`You can contribute to the bot by opening an issue or creating a pull request on GitHub.\n\n[GitHub Repository](${repoLink})\n[Issues](${repoLink}/issues)\n[Pull Requests](${repoLink}/pulls)`,
+				)
+				.setColor("Random");
 
-		interaction.reply({ embeds: [embed] });
+			interaction.reply({ embeds: [embed] });
+		} catch (error) {
+			console.error(error);
+		}
 	});

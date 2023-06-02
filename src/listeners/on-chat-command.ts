@@ -14,7 +14,7 @@ export default new EventListener()
 		}
 
 		try {
-			command.executor(client, interaction);
+			await command.executor(client, interaction);
 		} catch (replyError) {
 			console.error(replyError);
 			await interaction

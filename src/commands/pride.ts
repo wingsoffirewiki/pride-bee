@@ -43,92 +43,96 @@ export default new Command()
 	)
 	.setPermissions(Discord.PermissionFlagsBits.SendMessages)
 	.setExecutor(async (client, interaction) => {
-		await interaction.deferReply();
+		try {
+			await interaction.deferReply();
 
-		const flagName = interaction.options.getString("flag", false);
-		const image = interaction.options.getAttachment("image", false);
-		if (image && !isValidImage(image)) {
-			await interaction.followUp({
-				ephemeral: true,
-				content: "Invalid image!",
-			});
+			const flagName = interaction.options.getString("flag", false);
+			const image = interaction.options.getAttachment("image", false);
+			if (image && !isValidImage(image)) {
+				await interaction.followUp({
+					ephemeral: true,
+					content: "Invalid image!",
+				});
 
-			return;
-		}
-		const avatarAttachment = interaction.options.getAttachment("avatar", false);
-		if (avatarAttachment && !isValidImage(avatarAttachment)) {
-			await interaction.followUp({
-				ephemeral: true,
-				content: "Invalid image!",
-			});
+				return;
+			}
+			const avatarAttachment = interaction.options.getAttachment("avatar", false);
+			if (avatarAttachment && !isValidImage(avatarAttachment)) {
+				await interaction.followUp({
+					ephemeral: true,
+					content: "Invalid image!",
+				});
 
-			return;
-		}
-		const mask = interaction.options.getBoolean("mask", false) ?? false;
-		const blend = interaction.options.getBoolean("blend", false) ?? false;
+				return;
+			}
+			const mask = interaction.options.getBoolean("mask", false) ?? false;
+			const blend = interaction.options.getBoolean("blend", false) ?? false;
 
-		const avatarUrl =
+			const avatarUrl =
 			avatarAttachment?.url ??
 			interaction.user.avatarURL({
 				extension: "png",
 				size: 1024,
 			});
 
-		if (!avatarUrl) {
-			interaction.followUp({
-				ephemeral: true,
-				content: "You must provide an avatar or have a valid avatar",
-			});
+			if (!avatarUrl) {
+				interaction.followUp({
+					ephemeral: true,
+					content: "You must provide an avatar or have a valid avatar",
+				});
 
-			return;
-		}
+				return;
+			}
 
-		const avatar = await getImageFromUrl(avatarUrl);
+			const avatar = await getImageFromUrl(avatarUrl);
 
-		if (flagName && image) {
-			interaction.followUp({
-				ephemeral: true,
-				content: "You can only use one of the flag or image options!",
-			});
+			if (flagName && image) {
+				interaction.followUp({
+					ephemeral: true,
+					content: "You can only use one of the flag or image options!",
+				});
 
-			return;
-		}
+				return;
+			}
 
-		const flag = image
-			? await getImageFromUrl(image.url)
-			: getFlagImage(flagName ?? "lgbt");
+			const flag = image
+				? await getImageFromUrl(image.url)
+				: getFlagImage(flagName ?? "lgbt");
 
-		if (!flag) {
-			interaction.followUp({
-				ephemeral: true,
-				content: "Invalid flag!",
-			});
+			if (!flag) {
+				interaction.followUp({
+					ephemeral: true,
+					content: "Invalid flag!",
+				});
 
-			return;
-		}
+				return;
+			}
 
-		const renderedImage = await render(flag, avatar, mask, blend);
+			const renderedImage = await render(flag, avatar, mask, blend);
 
-		const buffer = await renderedImage.png().toBuffer();
+			const buffer = await renderedImage.png().toBuffer();
 
-		const fileName = `${
-			interaction.user.username.toLowerCase().replace(/[^a-zA-Z0-9]/g, "") ||
+			const fileName = `${
+				interaction.user.username.toLowerCase().replace(/[^a-zA-Z0-9]/g, "") ||
 			"avatar"
-		}-pride.png`;
+			}-pride.png`;
 
-		const attachment = new Discord.AttachmentBuilder(buffer).setName(fileName);
-		const embed = new Discord.EmbedBuilder();
+			const attachment = new Discord.AttachmentBuilder(buffer).setName(fileName);
+			const embed = new Discord.EmbedBuilder();
 
-		embed
-			.setTitle(
-				flagName ? `Pride With ${toPascalCase(flagName)} Flag` : "Pride",
-			)
-			.setDescription("Here you go!")
-			.setImage(`attachment://${fileName}`)
-			.setColor("Random");
+			embed
+				.setTitle(
+					flagName ? `Pride With ${toPascalCase(flagName)} Flag` : "Pride",
+				)
+				.setDescription("Here you go!")
+				.setImage(`attachment://${fileName}`)
+				.setColor("Random");
 
-		interaction.followUp({
-			embeds: [embed],
-			files: [attachment],
-		});
+			interaction.followUp({
+				embeds: [embed],
+				files: [attachment],
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	});
