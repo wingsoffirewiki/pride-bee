@@ -9,14 +9,9 @@ import {
 	EmbedBuilder,
 } from "discord.js";
 import {
-	flagsSorted,
+	flags,
 	getFlagImage,
-	getFlagNameFromAlias,
-	type Flag,
 } from "../util/flags";
-
-const flagEntries = Object.entries(flagsSorted);
-const firstFlag = flagEntries[0][0] as Flag;
 
 export default new Command()
 	.setName("flags")
@@ -37,6 +32,7 @@ export default new Command()
 					name: "flag",
 					description: "The flag to view",
 					type: ApplicationCommandOptionType.String,
+					autocomplete: true,
 					required: false,
 				},
 			],
@@ -47,10 +43,6 @@ export default new Command()
 
 		if (subCommand === "list") {
 			const embed = new EmbedBuilder();
-
-			const flags = flagEntries.map(
-				(entry, index) => `${index + 1}: \`${entry.flat().join(", ")}\``,
-			);
 
 			embed
 				.setTitle("Flags")
@@ -64,12 +56,19 @@ export default new Command()
 
 			await interaction.reply({ ephemeral: true, embeds: [embed] });
 		} else if (subCommand === "preview") {
-			let flagName =
-				getFlagNameFromAlias(
-					interaction.options.getString("flag", false) ?? firstFlag,
-				) ?? firstFlag;
+			let flagName = interaction.options.getString("flag", false) ?? flags[0];
 
-			const attachment = new AttachmentBuilder(getFlagImage(flagName)).setName(
+			const flagImage = getFlagImage(flagName);
+			if (flagImage === undefined) {
+				await interaction.reply({
+					ephemeral: true,
+					content: "Invalid flag",
+				});
+
+				return;
+			}
+
+			const attachment = new AttachmentBuilder(flagImage).setName(
 				`${flagName}.png`,
 			);
 
@@ -121,9 +120,7 @@ export default new Command()
 			});
 
 			collector.on("collect", async (buttonInteraction) => {
-				const currentIndex = flagEntries.findIndex(
-					(entry) => entry[0] === flagName,
-				);
+				const currentIndex = flags.indexOf(flagName);
 
 				if (buttonInteraction.customId === previousId) {
 					if (currentIndex <= 0) {
@@ -135,9 +132,9 @@ export default new Command()
 						return;
 					}
 
-					flagName = flagEntries[currentIndex - 1][0] as Flag;
+					flagName = flags[currentIndex - 1];
 				} else {
-					if (currentIndex >= flagEntries.length - 1) {
+					if (currentIndex >= flags.length - 1) {
 						await buttonInteraction.reply({
 							ephemeral: true,
 							content: "There are no more flags after this one.",
@@ -146,11 +143,21 @@ export default new Command()
 						return;
 					}
 
-					flagName = flagEntries[currentIndex + 1][0] as Flag;
+					flagName = flags[currentIndex + 1];
+				}
+
+				const newFlagImage = getFlagImage(flagName);
+				if (newFlagImage === undefined) {
+					await buttonInteraction.reply({
+						ephemeral: true,
+						content: "Invalid flag",
+					});
+
+					return;
 				}
 
 				const newAttachment = new AttachmentBuilder(
-					getFlagImage(flagName),
+					newFlagImage,
 				).setName(`${flagName}.png`);
 
 				embed

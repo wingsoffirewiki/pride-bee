@@ -1,7 +1,7 @@
 import { Command } from "@ferod/client";
 import * as Discord from "discord.js";
 import { toPascalCase } from "../util/casing";
-import { getFlagImage, getFlagNameFromAlias } from "../util/flags";
+import { getFlagImage } from "../util/flags";
 import { getImageFromUrl, isValidImage, render } from "../util/sharp";
 
 export default new Command()
@@ -13,6 +13,7 @@ export default new Command()
 			name: "flag",
 			description: "The flag to attach",
 			type: Discord.ApplicationCommandOptionType.String,
+			autocomplete: true,
 			required: false,
 		},
 		{
@@ -44,7 +45,7 @@ export default new Command()
 	.setExecutor(async (client, interaction) => {
 		await interaction.deferReply();
 
-		const flagString = interaction.options.getString("flag", false);
+		const flagName = interaction.options.getString("flag", false);
 		const image = interaction.options.getAttachment("image", false);
 		if (image && !isValidImage(image)) {
 			await interaction.followUp({
@@ -84,7 +85,7 @@ export default new Command()
 
 		const avatar = await getImageFromUrl(avatarUrl);
 
-		if (flagString && image) {
+		if (flagName && image) {
 			interaction.followUp({
 				ephemeral: true,
 				content: "You can only use one of the flag or image options!",
@@ -95,7 +96,7 @@ export default new Command()
 
 		const flag = image
 			? await getImageFromUrl(image.url)
-			: getFlagImage(flagString ?? "lgbt");
+			: getFlagImage(flagName ?? "lgbt");
 
 		if (!flag) {
 			interaction.followUp({
@@ -117,8 +118,6 @@ export default new Command()
 
 		const attachment = new Discord.AttachmentBuilder(buffer).setName(fileName);
 		const embed = new Discord.EmbedBuilder();
-
-		const flagName = flagString && getFlagNameFromAlias(flagString);
 
 		embed
 			.setTitle(
