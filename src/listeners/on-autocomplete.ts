@@ -1,5 +1,5 @@
 import { EventListener } from "@ferod/client";
-import { flagsSorted } from "../util/flags";
+import { flags } from "../util/flags";
 
 export default new EventListener()
 	.setEvent("interactionCreate")
@@ -15,7 +15,7 @@ export default new EventListener()
 
 		const focused = interaction.options.getFocused();
 
-		const choices = Object.keys(flagsSorted)
+		const choices = flags
 			.filter((flagName) => flagName.startsWith(focused))
 			.slice(0, 25);
 

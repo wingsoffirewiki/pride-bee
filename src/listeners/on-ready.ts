@@ -2,7 +2,7 @@ import { Client, EventListener } from "@ferod/client";
 import chalk from "chalk";
 import { ActivityType, Events } from "discord.js";
 import * as fs from "fs";
-import { flagsSorted } from "../util/flags.js";
+import { flags } from "../util/flags";
 
 const HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 
@@ -32,7 +32,6 @@ function setPresence(client: Client<true>): void {
 }
 
 function imagesExist(): boolean {
-	const flags = Object.keys(flagsSorted);
 	return flags.every((flag) => {
 		const exists = fs.existsSync(`./assets/flags/${flag}.png`);
 
