@@ -13,6 +13,7 @@ export default new Command()
 			name: "flag",
 			description: "The flag to attach",
 			type: Discord.ApplicationCommandOptionType.String,
+			autocomplete: true,
 			required: false,
 		},
 		{

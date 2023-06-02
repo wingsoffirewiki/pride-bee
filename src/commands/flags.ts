@@ -37,6 +37,7 @@ export default new Command()
 					name: "flag",
 					description: "The flag to view",
 					type: ApplicationCommandOptionType.String,
+					autocomplete: true,
 					required: false,
 				},
 			],
