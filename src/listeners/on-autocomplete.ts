@@ -24,5 +24,5 @@ export default new EventListener()
 				name: choice,
 				value: choice,
 			})),
-		);
+		).catch(console.error);
 	});
