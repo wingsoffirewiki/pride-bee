@@ -18,7 +18,8 @@ function setPresence(client: Client<true>): void {
 		status: "online",
 		activities: [
 			{
-				name: `/pride in ${client.guilds.cache.size} servers.`,
+				// name: `/pride in ${client.guilds.cache.size} servers.`,
+				name: "/pride; TRY RE-ADDING IF ERRORS",
 				type: ActivityType.Watching,
 			},
 		],
